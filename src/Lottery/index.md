@@ -3,10 +3,10 @@ nav:
   path: /hooks
 ---
 
-
+# 抽奖组件
 
 ```tsx
-import { Lottery } from 'marketing-components'
+import { Lottery } from 'marketing-components-pro';
 
 const data = [
   {
@@ -31,11 +31,11 @@ const data = [
     name: '代金券5',
   },
   {
-    id:6,
+    id: 6,
     name: '代金券6',
   },
   {
-    id:7,
+    id: 7,
     name: '代金券7',
   },
   {
@@ -44,5 +44,5 @@ const data = [
   },
 ];
 
-export default () => <Lottery data={ data }/>;
+export default () => <Lottery data={data} />;
 ```
