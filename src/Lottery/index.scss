@@ -17,5 +17,10 @@
   .is-btn {
     background-color: rgb(33, 194, 140);
     color: azure;
+    cursor: pointer;
+  }
+
+  .active {
+    background-color: rgb(227, 248, 121);
   }
 }
