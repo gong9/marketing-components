@@ -42,13 +42,14 @@ const Lottery = (props: LType) => {
     const path = [0, 1, 2, 4, 7, 6, 5, 3];
     let curIndex = 0;
     let stop = false;
+    const luckyRewardsIndex = Math.floor(Math.random() * path.length);
 
     setTimeout(() => {
       stop = true;
     }, 3000);
 
     const intervalId = setInterval(() => {
-      if (stop) clearInterval(intervalId);
+      if (stop && curIndex === luckyRewardsIndex) clearInterval(intervalId);
       if (curIndex > 7) curIndex = 0;
 
       setPrizeActiveState(
