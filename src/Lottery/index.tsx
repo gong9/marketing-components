@@ -1,17 +1,18 @@
 import classNames from 'classnames';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import './index.scss';
 
 type Tuple8<TItem> = [TItem, ...TItem[]] & { length: 8 };
 interface LDataType {
   id: string | number;
   name: string;
-  isCanHit?: boolean;
+  probability?: number;
 }
 
 interface LType {
   data: Tuple8<LDataType>;
   time?: number;
+  useCustomProbability?: boolean;
 }
 
 const Lottery = (props: LType) => {
@@ -25,6 +26,8 @@ const Lottery = (props: LType) => {
     ),
   );
 
+  const flag = useRef(true);
+
   const realViewData = useMemo(() => {
     return [
       ...props.data.slice(0, 4),
@@ -36,21 +39,70 @@ const Lottery = (props: LType) => {
     ];
   }, [props.data]);
 
+  const calCustomProbabilityIndex = () => {
+    const handleData = props.data;
+    let tempArr: number[] = [];
+    const notHandleItems = [];
+    let surplus = 1;
+
+    for (let i = 0; i < handleData.length; i++) {
+      if (handleData[i].probability === 0) continue;
+      if (handleData[i].probability) {
+        surplus = surplus - (handleData[i].probability as number);
+        tempArr = [
+          ...tempArr,
+          ...Array(
+            Math.floor((handleData[i].probability as number) * 100),
+          ).fill(i),
+        ];
+      } else {
+        notHandleItems.push(i);
+      }
+    }
+
+    if (surplus > 0) {
+      notHandleItems.forEach((item) => {
+        tempArr = [
+          ...tempArr,
+          ...Array(
+            Math.floor(Math.floor((surplus / notHandleItems.length) * 100)),
+          ).fill(item),
+        ];
+      });
+    }
+
+    return tempArr[Math.floor(Math.random() * tempArr.length)];
+  };
+
   const start = (id: string | number) => {
     if (id !== '__btn__') return;
+    if (!flag.current) return;
+
+    flag.current = false;
 
     const path = [0, 1, 2, 4, 7, 6, 5, 3];
     let curIndex = 0;
     let stop = false;
-    const luckyRewardsIndex = Math.floor(Math.random() * path.length);
+    let luckyRewardsValue: number;
+
+    if (props.useCustomProbability) {
+      luckyRewardsValue = calCustomProbabilityIndex();
+    }
+
+    const luckyRewardsIndex = props.useCustomProbability
+      ? path.findIndex((item) => item === luckyRewardsValue)
+      : Math.floor(Math.random() * path.length);
 
     setTimeout(() => {
       stop = true;
     }, 3000);
 
     const intervalId = setInterval(() => {
-      if (stop && curIndex === luckyRewardsIndex) clearInterval(intervalId);
       if (curIndex > 7) curIndex = 0;
+      if (stop && curIndex === luckyRewardsIndex) {
+        flag.current = true;
+        clearInterval(intervalId);
+      }
 
       setPrizeActiveState(
         props.data.reduce((pre, cur) => {
