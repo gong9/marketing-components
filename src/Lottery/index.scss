@@ -1,0 +1,21 @@
+.lottery {
+  display: flex;
+  width: 350px;
+  height: 350px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-self: space-between;
+
+  .lottery-item {
+    text-align: center;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(222, 220, 220);
+  }
+
+  .is-btn {
+    background-color: rgb(33, 194, 140);
+    color: azure;
+  }
+}

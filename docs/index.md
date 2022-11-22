@@ -7,6 +7,7 @@ hero:
       link: /guide
     - text: github
       link: /
+
 # features:
 #   - title: Hello
 #     emoji: 💎
