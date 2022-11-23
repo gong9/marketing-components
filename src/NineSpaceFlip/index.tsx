@@ -8,16 +8,27 @@ interface NSFItemType {
 }
 interface NSFType {
   data: NSFItemType[];
+  times?: number;
 }
 
 const NineSpaceFlip = (props: NSFType) => {
   const [fillState, updateFillState] = useState<boolean[]>(
     Array(props.data.length).fill(false),
   );
+  const [times, updateTimes] = useState(props.times || 3);
 
   const filpItem = (curReward: number) => {
+    if (times < 1) return;
+
     fillState[curReward] = true;
+    updateTimes((times) => times - 1);
     updateFillState([...fillState]);
+
+    if (times - 1 < 1) {
+      setTimeout(() => {
+        updateFillState(Array(props.data.length).fill(true));
+      }, 500);
+    }
   };
 
   return (
@@ -32,7 +43,7 @@ const NineSpaceFlip = (props: NSFType) => {
             key={item.id}
             onClick={() => filpItem(i)}
           >
-            <div className="nsf-item-outside">抽奖</div>
+            <div className="nsf-item-outside">奖</div>
             <div className="nsf-item-inside">{item.name}</div>
           </div>
         );
