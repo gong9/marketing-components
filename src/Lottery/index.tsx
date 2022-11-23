@@ -3,6 +3,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import './index.scss';
 
 type Tuple8<TItem> = [TItem, ...TItem[]] & { length: 8 };
+type CallbackType = (arg: LDataType) => void;
 interface LDataType {
   id: string | number;
   name: string;
@@ -13,6 +14,7 @@ interface LType {
   data: Tuple8<LDataType>;
   time?: number;
   useCustomProbability?: boolean;
+  callback?: CallbackType;
 }
 
 const Lottery = (props: LType) => {
@@ -99,9 +101,14 @@ const Lottery = (props: LType) => {
 
     const intervalId = setInterval(() => {
       if (curIndex > 7) curIndex = 0;
+
       if (stop && curIndex === luckyRewardsIndex) {
         flag.current = true;
         clearInterval(intervalId);
+
+        if (props.callback) {
+          (props.callback as CallbackType)(props.data[path[curIndex]]);
+        }
       }
 
       setPrizeActiveState(
@@ -119,6 +126,7 @@ const Lottery = (props: LType) => {
           }
         }, {}),
       );
+
       curIndex++;
     }, 100);
   };

@@ -20,7 +20,6 @@ const data = [
   {
     id: 2,
     name: '代金券2',
-    is: true,
   },
   {
     id: 3,
@@ -48,7 +47,11 @@ const data = [
   },
 ];
 
-export default () => <Lottery data={data} />;
+const callback = (luckyRewards) => {
+  console.log(luckyRewards.name);
+};
+
+export default () => <Lottery data={data} callback={callback} />;
 ```
 
 ### 使用自定义概率
@@ -66,7 +69,6 @@ const data = [
   {
     id: 2,
     name: '代金券2',
-    is: true,
   },
   {
     id: 3,
