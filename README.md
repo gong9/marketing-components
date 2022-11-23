@@ -3,11 +3,19 @@
 [![NPM version](https://img.shields.io/npm/v/marketing-components.svg?style=flat)](https://npmjs.org/package/marketing-components)
 [![NPM downloads](http://img.shields.io/npm/dm/marketing-components.svg?style=flat)](https://npmjs.org/package/marketing-components)
 
-
-
 ## Usage
 
-TODO
+安装:
+
+`pnpm add marketing-components-pro`
+
+使用:
+
+```tsx
+import { Lottery } from 'marketing-components-pro';
+
+export default () => <Lottery />;
+```
 
 ## Options
 
