@@ -1,16 +1,16 @@
-.lottery {
+@mixin lottery-base($lottery_width:300px) {
   display: flex;
-  width: 350px;
-  height: 350px;
+  width: $lottery_width;
+  height: $lottery_width;
   flex-wrap: wrap;
   justify-content: space-between;
   align-self: space-between;
 
   .lottery-item {
     text-align: center;
-    line-height: 100px;
-    width: 100px;
-    height: 100px;
+    line-height: $lottery_width/3 - 10px;
+    width: $lottery_width/3 - 10px;
+    height: $lottery_width/3 - 10px;
     border-radius: 5px;
     background-color: rgb(222, 220, 220);
   }
@@ -23,5 +23,35 @@
 
   .active {
     background-color: rgb(227, 248, 121);
+  }
+}
+
+@media screen and (min-width: 1160px) {
+  .lottery {
+    @include lottery-base(500px)
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .lottery {
+    @include lottery-base(420px)
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .lottery {
+    @include lottery-base(360px)
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .lottery {
+    @include lottery-base(300px)
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .lottery {
+    @include lottery-base(250px)
   }
 }
