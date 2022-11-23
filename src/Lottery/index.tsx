@@ -97,7 +97,7 @@ const Lottery = (props: LType) => {
 
     setTimeout(() => {
       stop = true;
-    }, 3000);
+    }, props.time || 3000);
 
     const intervalId = setInterval(() => {
       if (curIndex > 7) curIndex = 0;
