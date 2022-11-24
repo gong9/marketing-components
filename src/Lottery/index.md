@@ -103,6 +103,110 @@ const callback = (luckyRewards) => {
 export default () => <Lottery time={10000} data={data} callback={callback} />;
 ```
 
+### 自定义转动路径
+
+九宫格奖项的位置排列如下：
+
+```plan
+| 0 | 1 | 2 |
+————————————
+| 3 |   | 4 |
+————————————
+| 5 | 6 | 7 |
+```
+
+默认转动路径为 `[0, 1, 2, 4, 7, 6, 5, 3]`, 即顺时针转动
+
+#### 设置逆时钟转动
+
+即 `path = [0,3,5,6,7,4,2,1]`
+
+```tsx
+import { Lottery } from 'marketing-components-pro';
+
+const data = [
+  {
+    id: 1,
+    name: '代金券1',
+  },
+  {
+    id: 2,
+    name: '代金券2',
+  },
+  {
+    id: 3,
+    name: '代金券3',
+  },
+  {
+    id: 4,
+    name: '代金券4',
+  },
+  {
+    id: 5,
+    name: '代金券5',
+  },
+  {
+    id: 6,
+    name: '代金券6',
+  },
+  {
+    id: 7,
+    name: '代金券7',
+  },
+  {
+    id: 8,
+    name: '代金券8',
+  },
+];
+
+export default () => <Lottery data={data} path={[0, 3, 5, 6, 7, 4, 2, 1]} />;
+```
+
+#### 设置从代金券 3 开始顺时针转动
+
+即 `path = [2, 4, 7, 6, 5, 3, 0, 1]`
+
+```tsx
+import { Lottery } from 'marketing-components-pro';
+
+const data = [
+  {
+    id: 1,
+    name: '代金券1',
+  },
+  {
+    id: 2,
+    name: '代金券2',
+  },
+  {
+    id: 3,
+    name: '代金券3',
+  },
+  {
+    id: 4,
+    name: '代金券4',
+  },
+  {
+    id: 5,
+    name: '代金券5',
+  },
+  {
+    id: 6,
+    name: '代金券6',
+  },
+  {
+    id: 7,
+    name: '代金券7',
+  },
+  {
+    id: 8,
+    name: '代金券8',
+  },
+];
+
+export default () => <Lottery data={data} path={[2, 4, 7, 6, 5, 3, 0, 1]} />;
+```
+
 ### 自定义概率
 
 > 注意，如果各奖项均设置概率，请保证其概率之和为 1

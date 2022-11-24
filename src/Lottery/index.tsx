@@ -15,6 +15,7 @@ interface LType {
   time?: number;
   useCustomProbability?: boolean;
   callback?: CallbackType;
+  path?: number[];
 }
 
 const Lottery = (props: LType) => {
@@ -82,7 +83,7 @@ const Lottery = (props: LType) => {
 
     flag.current = false;
 
-    const path = [0, 1, 2, 4, 7, 6, 5, 3];
+    const path = props.path || [0, 1, 2, 4, 7, 6, 5, 3];
     let curIndex = 0;
     let stop = false;
     let luckyRewardsValue: number;
