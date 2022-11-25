@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { calCustomProbabilityIndex } from '../utils';
 import './index.scss';
 
-interface NSFItemType {
+export interface NSFItemType {
   id: number | string;
   name: string;
   probability?: number;
@@ -30,14 +30,13 @@ const NineSpaceFlip = (props: NSFType) => {
     ),
   );
 
-  const [curAwards, updateCurAwards] = useState([...props.data]);
-
+  const curAwards = useRef([...props.data]);
   const times = useRef(props.times || 3);
   const locationRecordMap = useRef<LocationRecordMapType[]>([]);
   const curSurplusDataArr = useRef<NSFItemType[]>([]);
 
   useEffect(() => {
-    updateCurAwards([...props.data]);
+    curAwards.current = [...props.data];
     curSurplusDataArr.current = [...props.data];
   }, [props.data]);
 
@@ -78,7 +77,7 @@ const NineSpaceFlip = (props: NSFType) => {
       }
     });
 
-    updateCurAwards(lastAwardsDataLocation);
+    curAwards.current = lastAwardsDataLocation;
   };
 
   const filpItem = (curReward: NSFItemType, index: number) => {
@@ -118,14 +117,14 @@ const NineSpaceFlip = (props: NSFType) => {
 
   return (
     <div className="nine-space-filp">
-      {curAwards.map((item, index) => {
+      {curAwards.current.map((item, index) => {
         return (
           <div
             className={classNames({
               'nsf-item': true,
               active: fillState[`active${item.id}`],
             })}
-            key={item.id}
+            key={index}
             onClick={() => filpItem(item, index)}
           >
             <div className="nsf-item-outside">奖</div>
