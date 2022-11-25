@@ -62,6 +62,8 @@ export default () => <NineSpaceFlip data={data} />;
 
 设置概率之后，真实奖项数据的放置顺序和页面上卡片的摆放顺序不再一致
 
+注意：如果设置抽奖次数为 9，则不可以由某一项的概率被设置为 0
+
 ```tsx
 import { NineSpaceFlip } from 'marketing-components-pro';
 
