@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
+  '@types/node': ^18.11.9
   '@types/react': ^18.0.25
   '@umijs/lint': ^4.0.0
   classnames: ^2.3.2
@@ -26,6 +27,7 @@ dependencies:
 devDependencies:
   '@commitlint/cli': 17.3.0
   '@commitlint/config-conventional': 17.3.0
+  '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@umijs/lint': 4.0.32_7vz6irljkpqvl7ijwubbpzn6i4
   dumi: 2.0.3_56frauz6z7jgqw7nhgbwq7tddm
@@ -1916,7 +1918,7 @@ packages:
   /@types/sax/1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.11.9
     dev: true
 
   /@types/scheduler/0.16.2:

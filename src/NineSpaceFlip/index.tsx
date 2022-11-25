@@ -19,12 +19,18 @@ interface LocationRecordMapType {
   awardData: NSFItemType;
 }
 
+enum FillState {
+  Close,
+  Open,
+  NotSelected,
+}
+
 const NineSpaceFlip = (props: NSFType) => {
   const [fillState, updateFillState] = useState<any>(
     props.data.reduce(
       (pre, cur) => ({
         ...pre,
-        ['active' + cur.id]: false,
+        ['active' + cur.id]: FillState.Close,
       }),
       {},
     ),
@@ -34,6 +40,15 @@ const NineSpaceFlip = (props: NSFType) => {
   const times = useRef(props.times || 3);
   const locationRecordMap = useRef<LocationRecordMapType[]>([]);
   const curSurplusDataArr = useRef<NSFItemType[]>([]);
+
+  useEffect(() => {
+    if (
+      process.env.NODE_ENV === 'development' &&
+      props.times &&
+      (props.times > 9 || props.times < 1)
+    )
+      throw new Error('NineSpaceFlip times invalid');
+  }, []);
 
   useEffect(() => {
     curAwards.current = [...props.data];
@@ -56,16 +71,6 @@ const NineSpaceFlip = (props: NSFType) => {
     locationRecordMap.current.forEach((item) => {
       lastAwardsDataLocation[item.index] = item.awardData;
     });
-
-    curSurplusDataArr.current = curSurplusDataArr.current
-      .map((item) => {
-        if (curHitAwardId !== item.id) {
-          return item;
-        } else {
-          return undefined;
-        }
-      })
-      .filter((item) => item) as NSFItemType[];
 
     let surplusDataArrIndex = 0;
 
@@ -90,6 +95,16 @@ const NineSpaceFlip = (props: NSFType) => {
       ? calCustomProbabilityIndex<NSFItemType>(curSurplusDataArr.current, true)
       : curReward.id;
 
+    curSurplusDataArr.current = curSurplusDataArr.current
+      .map((item) => {
+        if (curHitAwardId !== item.id) {
+          return item;
+        } else {
+          return undefined;
+        }
+      })
+      .filter((item) => item) as NSFItemType[];
+
     // use custom probability,reposition location required
     if (props.useCustomProbability) {
       reprocessDataOrder(curHitAwardId, index);
@@ -97,16 +112,16 @@ const NineSpaceFlip = (props: NSFType) => {
 
     updateFillState({
       ...fillState,
-      [`active${curHitAwardId}`]: true,
+      [`active${curHitAwardId}`]: FillState.Open,
     });
 
-    if (times.current === 0) {
+    if (times.current === 0 && curSurplusDataArr.current.length > 0) {
       setTimeout(() => {
         updateFillState(
-          props.data.reduce(
+          curSurplusDataArr.current.reduce(
             (pre, cur) => ({
               ...pre,
-              ['active' + cur.id]: true,
+              ['active' + cur.id]: FillState.NotSelected,
             }),
             {},
           ),
@@ -122,7 +137,9 @@ const NineSpaceFlip = (props: NSFType) => {
           <div
             className={classNames({
               'nsf-item': true,
-              active: fillState[`active${item.id}`],
+              'not-seleted':
+                fillState[`active${item.id}`] === FillState.NotSelected,
+              active: fillState[`active${item.id}`] !== FillState.Close,
             })}
             key={index}
             onClick={() => filpItem(item, index)}

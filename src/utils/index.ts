@@ -38,7 +38,5 @@ export const calCustomProbabilityIndex = <
     });
   }
 
-  console.log(tempArr);
-
   return tempArr[Math.floor(Math.random() * tempArr.length)];
 };

@@ -59,6 +59,12 @@
   .active {
     @include base_animation(filp);
   }
+
+  .not-seleted {
+    .nsf-item-inside {
+      background-color: rgb(214, 214, 211);
+    }
+  }
 }
 
 @media screen and (min-width: 1160px) {
