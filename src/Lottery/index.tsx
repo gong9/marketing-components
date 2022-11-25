@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useMemo, useRef, useState } from 'react';
+import { calCustomProbabilityIndex } from '../utils';
 import './index.scss';
 
 type Tuple8<TItem> = [TItem, ...TItem[]] & { length: 8 };
@@ -42,41 +43,6 @@ const Lottery = (props: LType) => {
     ];
   }, [props.data]);
 
-  const calCustomProbabilityIndex = () => {
-    const handleData = props.data;
-    let tempArr: number[] = [];
-    const notHandleItems = [];
-    let surplus = 1;
-
-    for (let i = 0; i < handleData.length; i++) {
-      if (handleData[i].probability === 0) continue;
-      if (handleData[i].probability) {
-        surplus = surplus - (handleData[i].probability as number);
-        tempArr = [
-          ...tempArr,
-          ...Array(
-            Math.floor((handleData[i].probability as number) * 100),
-          ).fill(i),
-        ];
-      } else {
-        notHandleItems.push(i);
-      }
-    }
-
-    if (surplus > 0) {
-      notHandleItems.forEach((item) => {
-        tempArr = [
-          ...tempArr,
-          ...Array(
-            Math.floor(Math.floor((surplus / notHandleItems.length) * 100)),
-          ).fill(item),
-        ];
-      });
-    }
-
-    return tempArr[Math.floor(Math.random() * tempArr.length)];
-  };
-
   const start = (id: string | number) => {
     if (id !== '__btn__') return;
     if (!flag.current) return;
@@ -89,7 +55,7 @@ const Lottery = (props: LType) => {
     let luckyRewardsValue: number;
 
     if (props.useCustomProbability) {
-      luckyRewardsValue = calCustomProbabilityIndex();
+      luckyRewardsValue = calCustomProbabilityIndex<LDataType>(props.data);
     }
 
     const luckyRewardsIndex = props.useCustomProbability
