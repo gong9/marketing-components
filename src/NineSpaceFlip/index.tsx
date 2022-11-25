@@ -12,36 +12,53 @@ interface NSFType {
 }
 
 const NineSpaceFlip = (props: NSFType) => {
-  const [fillState, updateFillState] = useState<boolean[]>(
-    Array(props.data.length).fill(false),
+  const [fillState, updateFillState] = useState<any>(
+    props.data.reduce(
+      (pre, cur) => ({
+        ...pre,
+        ['active' + cur.id]: false,
+      }),
+      {},
+    ),
   );
+
   const [times, updateTimes] = useState(props.times || 3);
 
-  const filpItem = (curReward: number) => {
+  const filpItem = (curReward: NSFItemType) => {
     if (times < 1) return;
 
-    fillState[curReward] = true;
     updateTimes((times) => times - 1);
-    updateFillState([...fillState]);
+    updateFillState({
+      ...fillState,
+      [`active${curReward.id}`]: true,
+    });
 
     if (times - 1 < 1) {
       setTimeout(() => {
-        updateFillState(Array(props.data.length).fill(true));
+        updateFillState(
+          props.data.reduce(
+            (pre, cur) => ({
+              ...pre,
+              ['active' + cur.id]: true,
+            }),
+            {},
+          ),
+        );
       }, 500);
     }
   };
 
   return (
     <div className="nine-space-filp">
-      {props.data.map((item, i) => {
+      {props.data.map((item) => {
         return (
           <div
             className={classNames({
               'nsf-item': true,
-              active: fillState[i],
+              active: fillState[`active${item.id}`],
             })}
             key={item.id}
-            onClick={() => filpItem(i)}
+            onClick={() => filpItem(item)}
           >
             <div className="nsf-item-outside">奖</div>
             <div className="nsf-item-inside">{item.name}</div>
