@@ -49,11 +49,16 @@ export const calRatio = <
   T extends { probability: number; id: number | string },
 >(
   data: T[],
+  isAllTimes: boolean,
 ) => {
   return data.map((item) => {
+    const curRatio = Math.floor(item.probability * 100);
+    if (curRatio <= 0 && isAllTimes) {
+      throw new Error("「can't put it back, probability cannot < 0");
+    }
     return {
       ...item,
-      ratio: Math.floor(item.probability * 100),
+      ratio: curRatio,
     };
   }) as RatioType<T>[];
 };
@@ -140,6 +145,7 @@ export const calCustomProbabilityPro = <
   T extends { probability?: number; id: number | string },
 >(
   data: T[],
+  isAllTimes = false,
 ) => {
-  return calProbabilityFromRatio(calRatio(calProbability(data)));
+  return calProbabilityFromRatio(calRatio(calProbability(data), isAllTimes));
 };

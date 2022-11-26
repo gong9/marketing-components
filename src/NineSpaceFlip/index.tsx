@@ -49,7 +49,7 @@ const NineSpaceFlip = (props: NSFType) => {
       (props.times > 9 || props.times < 1)
     )
       throw new Error('NineSpaceFlip times invalid');
-  }, []);
+  }, [props.times]);
 
   useEffect(() => {
     curAwards.current = [...props.data];
@@ -93,7 +93,10 @@ const NineSpaceFlip = (props: NSFType) => {
 
     // calculated value
     const curHitAwardId = props.useCustomProbability
-      ? calCustomProbabilityPro<NSFItemType>(curSurplusDataArr.current)
+      ? calCustomProbabilityPro<NSFItemType>(
+          curSurplusDataArr.current,
+          props.times === 9,
+        )
       : curReward.id;
 
     curSurplusDataArr.current = curSurplusDataArr.current
