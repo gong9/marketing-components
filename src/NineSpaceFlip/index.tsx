@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
-import { calCustomProbabilityIndex } from '../utils';
+import { calCustomProbabilityPro } from '../utils';
 import './index.scss';
 
 export interface NSFItemType {
@@ -8,6 +8,7 @@ export interface NSFItemType {
   name: string;
   probability?: number;
 }
+
 interface NSFType {
   data: NSFItemType[];
   times?: number;
@@ -92,7 +93,7 @@ const NineSpaceFlip = (props: NSFType) => {
 
     // calculated value
     const curHitAwardId = props.useCustomProbability
-      ? calCustomProbabilityIndex<NSFItemType>(curSurplusDataArr.current, true)
+      ? calCustomProbabilityPro<NSFItemType>(curSurplusDataArr.current)
       : curReward.id;
 
     curSurplusDataArr.current = curSurplusDataArr.current
