@@ -270,3 +270,21 @@ export default () => (
   <NineSpaceFlip data={data} times={8} useCustomProbability={true} />
 );
 ```
+
+### API
+
+#### 组件属性
+
+| 属性                 | 说明                    | 类型           | 默认值      |
+| -------------------- | ----------------------- | -------------- | ----------- |
+| data                 | 奖项数据 （必填）       | NSFItemType[ ] | -           |
+| useCustomProbability | 是否自定义概率 （可选） | boolean        | false       |
+| times                | 可翻奖次数 （可选）     | number         | 3，区间 1-9 |
+
+#### 单 data 属性 [NSFItemType]
+
+| 属性        | 说明                                                  | 类型               | 默认值 |
+| ----------- | ----------------------------------------------------- | ------------------ | ------ |
+| id          | 奖项唯一 id （必填）                                  | [ string, number ] | -      |
+| name        | 奖项描述 （必填）                                     | string             | -      |
+| probability | 翻开概率之后「需要添加 useCustomProbability」（可选） | number             | 1/n    |

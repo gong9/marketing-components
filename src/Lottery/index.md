@@ -312,7 +312,7 @@ export default () => <Lottery data={data} useCustomProbability={true} />;
 
 | 属性                 | 说明                    | 类型         | 默认值 |
 | -------------------- | ----------------------- | ------------ | ------ |
-| data                 | 奖项数据                | LDataType[ ] | -      |
+| data                 | 奖项数据 （必填）       | LDataType[ ] | -      |
 | useCustomProbability | 是否自定义概率 （可选） | boolean      | false  |
 | time                 | 转动持续时间 （可选）   | number       | 3000   |
 | callback             | 转动结束回调 （可选）   | function     | -      |
@@ -321,6 +321,6 @@ export default () => <Lottery data={data} useCustomProbability={true} />;
 
 | 属性        | 说明                                         | 类型               | 默认值 |
 | ----------- | -------------------------------------------- | ------------------ | ------ |
-| id          | 奖项唯一 id                                  | [ string, number ] | -      |
-| name        | 奖项描述                                     | string             | -      |
+| id          | 奖项唯一 id （必填）                         | [ string, number ] | -      |
+| name        | 奖项描述 （必填）                            | string             | -      |
 | probability | 设置自定义概率之后，此奖项的命中概率（可选） | number             | 1/n    |
