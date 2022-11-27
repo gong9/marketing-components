@@ -54,7 +54,7 @@ const data = [
 export default () => <NineSpaceFlip data={data} />;
 ```
 
-### 设置翻奖次数
+### 自定义翻奖次数
 
 翻奖次数默认 3 次，可自定义次数。 次数合法区间为[1-9]
 
@@ -105,7 +105,7 @@ const data = [
 export default () => <NineSpaceFlip data={data} times={9} />;
 ```
 
-### 设置概率
+### 自定义概率
 
 设置概率之后，真实奖项数据的放置顺序和页面上卡片的摆放顺序不再一致
 
@@ -271,6 +271,18 @@ export default () => (
 );
 ```
 
+### 回调函数
+
+TODO
+
+#### 每一轮翻奖结束触发
+
+#### 翻奖次数全部用完后触发
+
+### 注意
+
+本组件，仅支持九空格。即仅支持设置 9 个奖项数据
+
 ### API
 
 #### 组件属性
@@ -288,3 +300,10 @@ export default () => (
 | id          | 奖项唯一 id （必填）                                  | [ string, number ] | -      |
 | name        | 奖项描述 （必填）                                     | string             | -      |
 | probability | 翻开概率之后「需要添加 useCustomProbability」（可选） | number             | 1/n    |
+
+#### 回调勾子
+
+| 属性            | 说明                            | 类型     | 默认值 |
+| --------------- | ------------------------------- | -------- | ------ |
+| currentHitAfter | 每一轮翻奖结束触发 （可选）     | function | -      |
+| allHitAfter     | 翻奖次数全部用完后触发 （可选） | function | -      |
