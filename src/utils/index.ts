@@ -1,10 +1,10 @@
 type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 
-type BaseType<T> = {
-  [P in keyof Omit<T, 'probability'>]: Omit<T, 'probability'>[P];
-} & { probability: number };
+type BaseType<T, K extends string, P extends keyof any> = Omit<T, K> & {
+  [prop in K]: P;
+};
 
-type RatioType<T> = BaseType<T> & { ratio: number };
+type RatioType<T> = T & { ratio: number };
 
 /**
  * Probability of each term
@@ -38,7 +38,7 @@ export const calProbability = <
         probability: (surplusProbability / unassignedItem.length).toFixed(2),
       };
     }),
-  ] as BaseType<T>[];
+  ] as BaseType<T, 'probability', number>[];
 };
 
 /**
