@@ -12,9 +12,8 @@ interface LDataType {
   [propName: string]: unknown;
 }
 
-export type AwardType = TupleNum<LDataType, 8>;
 interface LType {
-  data: AwardType;
+  data: TupleNum<LDataType, 8>;
   time?: number;
   useCustomProbability?: boolean;
   callback?: CallbackType;

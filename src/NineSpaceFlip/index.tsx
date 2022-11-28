@@ -11,9 +11,8 @@ interface NSFItemType {
   [propName: string]: unknown;
 }
 
-export type AwardType = TupleNum<NSFItemType, 9>;
 interface NSFType {
-  data: AwardType;
+  data: TupleNum<NSFItemType, 9>;
   times?: number;
   useCustomProbability?: boolean;
   currentHitAfter?: (hitAward: NSFItemType) => void;
