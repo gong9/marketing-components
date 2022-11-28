@@ -44,6 +44,7 @@ const NineSpaceFlip = (props: NSFType) => {
   const times = useRef(props.times || 3);
   const locationRecordMap = useRef<LocationRecordMapType[]>([]);
   const curSurplusDataArr = useRef<NSFItemType[]>([]);
+  const curHitDataArr = useRef<NSFItemType[]>([]);
 
   useEffect(() => {
     if (
@@ -93,6 +94,7 @@ const NineSpaceFlip = (props: NSFType) => {
     if (times.current < 1) return;
 
     times.current--;
+    curHitDataArr.current.push(curReward);
 
     // calculated value
     const curHitAwardId = props.useCustomProbability
@@ -120,6 +122,17 @@ const NineSpaceFlip = (props: NSFType) => {
     updateFillState({
       ...fillState,
       [`active${curHitAwardId}`]: FillState.Open,
+    });
+
+    setTimeout(() => {
+      if (props.currentHitAfter) {
+        props.currentHitAfter(
+          props.data.find((item) => item.id === curHitAwardId) as NSFItemType,
+        );
+      }
+
+      if (times.current === 0 && props.allHitAfter)
+        props.allHitAfter(curHitDataArr.current);
     });
 
     if (times.current === 0 && curSurplusDataArr.current.length > 0) {

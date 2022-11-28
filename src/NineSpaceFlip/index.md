@@ -268,11 +268,132 @@ export default () => (
 
 ### 回调函数
 
-TODO
+- currentHitAfter 「每一轮翻奖结束触发」
+- allHitAfter 「翻奖次数全部用完后触发」
 
-#### 每一轮翻奖结束触发
+#### currentHitAfter
 
-#### 翻奖次数全部用完后触发
+回调参数：当前命中的奖项数据
+
+> 请打开控制台查看输出
+
+```tsx
+import { NineSpaceFlip } from 'marketing-components-pro';
+
+// interface NSFItemType {
+//   id: number | string;
+//   name: string;
+//   probability?: number;
+// }
+
+const data = [
+  {
+    id: 1,
+    name: '代金券1',
+  },
+  {
+    id: 2,
+    name: '代金券2',
+  },
+  {
+    id: 3,
+    name: '代金券3',
+  },
+  {
+    id: 4,
+    name: '代金券4',
+  },
+  {
+    id: 5,
+    name: '代金券5',
+  },
+  {
+    id: 6,
+    name: '代金券6',
+  },
+  {
+    id: 7,
+    name: '代金券7',
+  },
+  {
+    id: 8,
+    name: '代金券8',
+  },
+  {
+    id: 9,
+    name: '代金券9',
+  },
+];
+
+const currentHitAfterCb = (data) => {
+  console.log('🎉恭喜翻中—' + data.name);
+};
+
+export default () => (
+  <NineSpaceFlip data={data} currentHitAfter={currentHitAfterCb} />
+);
+```
+
+#### allHitAfter
+
+回调参数：全部命中的奖项数据数组
+
+> 请打开控制台查看输出
+
+```tsx
+import { NineSpaceFlip } from 'marketing-components-pro';
+
+// interface NSFItemType {
+//   id: number | string;
+//   name: string;
+//   probability?: number;
+// }
+
+const data = [
+  {
+    id: 1,
+    name: '代金券1',
+  },
+  {
+    id: 2,
+    name: '代金券2',
+  },
+  {
+    id: 3,
+    name: '代金券3',
+  },
+  {
+    id: 4,
+    name: '代金券4',
+  },
+  {
+    id: 5,
+    name: '代金券5',
+  },
+  {
+    id: 6,
+    name: '代金券6',
+  },
+  {
+    id: 7,
+    name: '代金券7',
+  },
+  {
+    id: 8,
+    name: '代金券8',
+  },
+  {
+    id: 9,
+    name: '代金券9',
+  },
+];
+
+const allHitAfterCb = (dataArr) => {
+  console.log('🎉恭喜翻中—' + dataArr.map((item) => item.name).join(','));
+};
+
+export default () => <NineSpaceFlip data={data} allHitAfter={allHitAfterCb} />;
+```
 
 ### 注意
 
