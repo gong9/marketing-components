@@ -12,7 +12,7 @@ interface LDataType {
   [propName: string]: unknown;
 }
 
-interface LType {
+export interface LType {
   data: Tuple8<LDataType>;
   time?: number;
   useCustomProbability?: boolean;

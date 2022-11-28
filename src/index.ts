@@ -1,2 +1,5 @@
-export { default as Lottery } from './Lottery';
-export { default as NineSpaceFlip } from './NineSpaceFlip';
+export { default as Lottery, LType as LotteryPropsType } from './Lottery';
+export {
+  default as NineSpaceFlip,
+  NSFType as NSFTProsType,
+} from './NineSpaceFlip';

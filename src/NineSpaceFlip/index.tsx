@@ -10,7 +10,7 @@ export interface NSFItemType {
   [propName: string]: unknown;
 }
 
-interface NSFType {
+export interface NSFType {
   data: NSFItemType[];
   times?: number;
   useCustomProbability?: boolean;
