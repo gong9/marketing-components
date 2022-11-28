@@ -5,7 +5,7 @@ import { TupleNum } from '../utils/type';
 import './index.scss';
 
 type CallbackType = (arg: LDataType) => void;
-interface LDataType {
+export interface LDataType {
   id: string | number;
   name: string;
   probability?: number;
