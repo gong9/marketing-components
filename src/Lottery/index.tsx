@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React, { useMemo, useRef, useState } from 'react';
 import { calCustomProbabilityIndex } from '../utils';
+import { TupleNum } from '../utils/type';
 import './index.scss';
 
-type Tuple8<TItem> = [TItem, ...TItem[]] & { length: 8 };
 type CallbackType = (arg: LDataType) => void;
 interface LDataType {
   id: string | number;
@@ -12,8 +12,9 @@ interface LDataType {
   [propName: string]: unknown;
 }
 
-export interface LType {
-  data: Tuple8<LDataType>;
+export type AwardDataType = TupleNum<LDataType, 8>;
+interface LType {
+  data: AwardDataType;
   time?: number;
   useCustomProbability?: boolean;
   callback?: CallbackType;

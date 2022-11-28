@@ -1,5 +1,8 @@
-export { default as Lottery, LType as LotteryPropsType } from './Lottery';
 export {
+  AwardDataType as LotteryDataType,
+  default as Lottery,
+} from './Lottery';
+export {
+  AwardType as NSFDataType,
   default as NineSpaceFlip,
-  NSFType as NSFTProsType,
 } from './NineSpaceFlip';

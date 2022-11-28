@@ -1,17 +1,19 @@
 import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import { calCustomProbabilityPro } from '../utils';
+import { TupleNum } from '../utils/type';
 import './index.scss';
 
-export interface NSFItemType {
+interface NSFItemType {
   id: number | string;
   name: string;
   probability?: number;
   [propName: string]: unknown;
 }
 
-export interface NSFType {
-  data: NSFItemType[];
+export type AwardType = TupleNum<NSFItemType, 9>;
+interface NSFType {
+  data: AwardType;
   times?: number;
   useCustomProbability?: boolean;
   currentHitAfter?: (hitAward: NSFItemType) => void;
