@@ -9,6 +9,7 @@ interface LDataType {
   id: string | number;
   name: string;
   probability?: number;
+  [propName: string]: unknown;
 }
 
 interface LType {

@@ -7,14 +7,15 @@ export interface NSFItemType {
   id: number | string;
   name: string;
   probability?: number;
+  [propName: string]: unknown;
 }
 
 interface NSFType {
   data: NSFItemType[];
   times?: number;
   useCustomProbability?: boolean;
-  currentHitAfter?: <T>(hitAward: T) => void;
-  allHitAfter?: <T>(hitAwardArr: T[]) => void;
+  currentHitAfter?: (hitAward: NSFItemType) => void;
+  allHitAfter?: (hitAwardArr: NSFItemType[]) => void;
 }
 
 interface LocationRecordMapType {
