@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import { calCustomProbabilityPro } from '../utils';
-import { TupleNum } from '../utils/type';
 import './index.scss';
 
 interface NSFItemType {
@@ -12,7 +11,7 @@ interface NSFItemType {
 }
 
 interface NSFType {
-  data: TupleNum<NSFItemType, 9>;
+  data: NSFItemType[];
   times?: number;
   useCustomProbability?: boolean;
   currentHitAfter?: (hitAward: NSFItemType) => void;
@@ -57,6 +56,12 @@ const NineSpaceFlip = (props: NSFType) => {
   }, [props.times]);
 
   useEffect(() => {
+    if (process.env.NODE_ENV === 'development' && props.data.length !== 9) {
+      throw new Error(
+        'nine-space-flip awards arr length invalid,the group length of the number of awards can only be equal to 9',
+      );
+    }
+
     curAwards.current = [...props.data];
     curSurplusDataArr.current = [...props.data];
   }, [props.data]);

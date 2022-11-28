@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { calCustomProbabilityIndex } from '../utils';
-import { TupleNum } from '../utils/type';
 import './index.scss';
 
 type CallbackType = (arg: LDataType) => void;
@@ -13,7 +12,7 @@ export interface LDataType {
 }
 
 interface LType {
-  data: TupleNum<LDataType, 8>;
+  data: LDataType[];
   time?: number;
   useCustomProbability?: boolean;
   callback?: CallbackType;
@@ -42,6 +41,14 @@ const Lottery = (props: LType) => {
       },
       ...props.data.slice(4),
     ];
+  }, [props.data]);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development' && props.data.length !== 8) {
+      throw new Error(
+        'lottery awards arr length invalid,the group length of the number of awards can only be equal to 8',
+      );
+    }
   }, [props.data]);
 
   const start = (id: string | number) => {
