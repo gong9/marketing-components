@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { throttle } from 'poor-utils-pro';
 import React, { useEffect, useRef, useState } from 'react';
 import { calCustomProbabilityPro } from '../utils';
 import './index.scss';
@@ -96,11 +97,14 @@ const NineSpaceFlip = (props: NSFType) => {
     curAwards.current = lastAwardsDataLocation;
   };
 
-  const filpItem = (curReward: NSFItemType, index: number) => {
+  const filpItem = throttle((curReward: NSFItemType, index: number) => {
     if (times.current < 1) return;
+    if (
+      curHitDataArr.current.findIndex((item) => item.id === curReward.id) !== -1
+    )
+      return;
 
     times.current--;
-    curHitDataArr.current.push(curReward);
 
     // calculated value
     const curHitAwardId = props.useCustomProbability
@@ -109,6 +113,10 @@ const NineSpaceFlip = (props: NSFType) => {
           props.times === 9,
         )
       : curReward.id;
+
+    curHitDataArr.current.push(
+      props.data.find((item) => item.id === curHitAwardId) as NSFItemType,
+    );
 
     curSurplusDataArr.current = curSurplusDataArr.current
       .map((item) => {
@@ -154,7 +162,7 @@ const NineSpaceFlip = (props: NSFType) => {
         );
       }, 500);
     }
-  };
+  }, 10);
 
   return (
     <div className="nine-space-filp">

@@ -12,6 +12,7 @@ specifiers:
   father: ^4.1.0
   husky: ^8.0.1
   lint-staged: ^13.0.3
+  poor-utils-pro: ^1.6.1
   prettier: ^2.7.1
   prettier-plugin-organize-imports: ^3.0.0
   prettier-plugin-packagejson: ^2.2.18
@@ -22,6 +23,7 @@ specifiers:
 
 dependencies:
   classnames: 2.3.2
+  poor-utils-pro: 1.6.1
   sass: 1.56.1
 
 devDependencies:
@@ -8525,6 +8527,10 @@ packages:
   /point-in-polygon/1.1.0:
     resolution: {integrity: sha512-3ojrFwjnnw8Q9242TzgXuTD+eKiutbzyslcq1ydfu82Db2y+Ogbmyrkpv0Hgj31qwT3lbS9+QAAO/pIQM35XRw==}
     dev: true
+
+  /poor-utils-pro/1.6.1:
+    resolution: {integrity: sha512-pgUJZbLMxQXjnzd1lKy/KA83P/0n1vpPQdrslOhJ+0Q4YPucgmMPv/zvTwtdUI7jwCkigu5feAXZgiIbeNeYlA==}
+    dev: false
 
   /postcss-attribute-case-insensitive/5.0.2:
     resolution: {integrity: sha512-XIidXV8fDr0kKt28vqki84fRK8VW8eTuIa4PChv2MqKuT6C9UjmSKzen6KaWhWEoYvwxFCa7n/tC1SZ3tyq4SQ==}

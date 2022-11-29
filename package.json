@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "classnames": "^2.3.2",
+    "poor-utils-pro": "^1.6.1",
     "sass": "^1.56.1"
   },
   "devDependencies": {
