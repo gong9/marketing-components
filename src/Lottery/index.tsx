@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useSetStyle } from '../hooks';
 import { calCustomProbabilityIndex } from '../utils';
 import './index.scss';
 
@@ -8,15 +9,26 @@ export interface LDataType {
   id: string | number;
   name: string;
   probability?: number;
+  background?: string;
+  awardIcon?: string;
+  textColor?: string;
   [propName: string]: unknown;
 }
-
+interface LotteryGlobalStyleType {
+  background?: string;
+  radius?: string;
+  btnBackground?: string;
+  btnColor?: string;
+  activeBackground?: string;
+  activeColor?: string;
+}
 interface LType {
   data: LDataType[];
   time?: number;
   useCustomProbability?: boolean;
   callback?: CallbackType;
   path?: number[];
+  LotteryGlobalStyle?: LotteryGlobalStyleType;
 }
 
 const Lottery = (props: LType) => {
@@ -31,6 +43,27 @@ const Lottery = (props: LType) => {
   );
 
   const flag = useRef(true);
+  const lotteryRef = useRef<HTMLDivElement>(null);
+  const lotteryBtnRef = useRef<HTMLDivElement | null>(null);
+
+  // set style
+  useSetStyle(
+    lotteryRef,
+    {
+      background: props.LotteryGlobalStyle?.background,
+      borderRadius: props.LotteryGlobalStyle?.radius,
+    },
+    [props.LotteryGlobalStyle],
+  );
+
+  useSetStyle(
+    lotteryBtnRef,
+    {
+      background: props.LotteryGlobalStyle?.btnBackground,
+      color: props.LotteryGlobalStyle?.btnColor,
+    },
+    [props.LotteryGlobalStyle],
+  );
 
   const realViewData = useMemo(() => {
     return [
@@ -107,7 +140,13 @@ const Lottery = (props: LType) => {
   };
 
   return (
-    <div className="lottery">
+    <div
+      ref={lotteryRef}
+      className="lottery"
+      style={{
+        background: props.LotteryGlobalStyle?.background,
+      }}
+    >
       {realViewData.map((item) => {
         return (
           <div
@@ -117,10 +156,28 @@ const Lottery = (props: LType) => {
               active:
                 item.id !== '__btn__' && prizeActiveState[`active${item.id}`],
             })}
+            ref={(node) => {
+              if (item.id === '__btn__') {
+                lotteryBtnRef.current = node;
+              }
+            }}
+            style={{ background: item.background }}
             onClick={() => start(item.id)}
             key={item.id}
           >
-            {item.name}
+            {item.awardIcon && (
+              <img
+                className="award-icon"
+                src={item.awardIcon}
+                alt="awardIcon"
+              />
+            )}
+            <span
+              className="award-text"
+              style={{ color: item.textColor || 'azure' }}
+            >
+              {item.name}
+            </span>
           </div>
         );
       })}

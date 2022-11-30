@@ -5,24 +5,42 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-self: space-between;
+  padding: 20px;
+  border-radius: 5px;
 
   .lottery-item {
-    text-align: center;
-    line-height: $lottery_width/3 - 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: $lottery_width/3 - 10px;
     height: $lottery_width/3 - 10px;
     border-radius: 5px;
     background-color: rgb(222, 220, 220);
+
+    .award-icon {
+      width: ($lottery_width/3 - 10px)/4;
+      height: ($lottery_width/3 - 10px)/4;
+      margin-bottom: 10px;
+    }
+
+    .award-text {
+      font-size: 1.1vw;
+    }
   }
 
   .is-btn {
     background-color: rgb(33, 194, 140);
     color: azure;
     cursor: pointer;
+
+    .award-text {
+      font-size: 1.6vw;
+    }
   }
 
   .active {
-    background-color: rgb(227, 248, 121);
+    background-color: rgb(121, 221, 248) !important;
   }
 }
 

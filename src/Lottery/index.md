@@ -98,6 +98,98 @@ const callback = (luckyRewards) => {
 export default () => <Lottery time={10000} data={data} callback={callback} />;
 ```
 
+### 自定义样式
+
+```tsx
+import { Lottery } from 'marketing-components-pro';
+
+const LotteryGlobalStyle = {
+  background: '#e37815',
+  radius: '5px',
+  btnBackground: 'rgb(70 210 227)',
+  btnBackColor: 'azure',
+};
+
+const data = [
+  {
+    id: 1,
+    name: '随机矿石',
+    background: '#fdf3f3',
+    textColor: '#d25f00',
+    awardIcon:
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32ed6a7619934144882d841761b63d3c~tplv-k3u1fbpfcp-no-mark:0:0:0:0.awebp',
+  },
+  {
+    id: 2,
+    name: 'Bug',
+    background: '#fdf3f3',
+    textColor: '#d25f00',
+    awardIcon:
+      'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a4ce25d48b8405cbf5444b6195928d4~tplv-k3u1fbpfcp-no-mark:0:0:0:0.awebp',
+  },
+  {
+    id: 3,
+    name: '随机限量徽章一枚',
+    background: '#fdf3f3',
+    textColor: '#d25f00',
+    awardIcon:
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5a4bcb86e4614b6ea9857c2ee8372076~tplv-k3u1fbpfcp-no-mark:0:0:0:0.awebp?',
+  },
+  {
+    id: 4,
+    name: '「睡眠日」编织袋',
+    background: '#fdf3f3',
+    textColor: '#d25f00',
+    awardIcon:
+      'https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d000a0408ece46cd9b89250157d342c6~tplv-k3u1fbpfcp-no-mark:0:0:0:0.awebp?',
+  },
+  {
+    id: 5,
+    name: 'Click午睡枕',
+    background: '#fdf3f3',
+    textColor: '#d25f00',
+    awardIcon:
+      'https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d000a0408ece46cd9b89250157d342c6~tplv-k3u1fbpfcp-no-mark:0:0:0:0.awebp?',
+  },
+  {
+    id: 6,
+    name: '抖音鼠标垫',
+    background: '#fdf3f3',
+    textColor: '#d25f00',
+    awardIcon:
+      'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/62c9841ecdea4434802b7b56c8ffcba2~tplv-k3u1fbpfcp-no-mark:0:0:0:0.awebp?',
+  },
+  {
+    id: 7,
+    name: '索尼降噪耳机',
+    background: '#fdf3f3',
+    textColor: '#d25f00',
+    awardIcon:
+      'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd767a5e9dfe4aaf88012aba206f9507~tplv-k3u1fbpfcp-no-mark:0:0:0:0.awebp?',
+  },
+  {
+    id: 8,
+    name: 'Switch',
+    background: '#fdf3f3',
+    textColor: '#d25f00',
+    awardIcon:
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5b6cc3eaa4b4dbbb8adfe4c43e1c7a3~tplv-k3u1fbpfcp-no-mark:0:0:0:0.awebp?',
+  },
+];
+
+const callback = (luckyRewards) => {
+  console.log(luckyRewards.name);
+};
+
+export default () => (
+  <Lottery
+    LotteryGlobalStyle={LotteryGlobalStyle}
+    data={data}
+    callback={callback}
+  />
+);
+```
+
 ### 自定义转动路径
 
 九宫格奖项的位置排列如下：
