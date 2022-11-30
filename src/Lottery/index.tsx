@@ -14,6 +14,7 @@ export interface LDataType {
   textColor?: string;
   [propName: string]: unknown;
 }
+
 interface LotteryGlobalStyleType {
   background?: string;
   radius?: string;
@@ -22,13 +23,14 @@ interface LotteryGlobalStyleType {
   activeBackground?: string;
   activeColor?: string;
 }
+
 interface LType {
   data: LDataType[];
   time?: number;
   useCustomProbability?: boolean;
   callback?: CallbackType;
   path?: number[];
-  LotteryGlobalStyle?: LotteryGlobalStyleType;
+  lotteryGlobalStyle?: LotteryGlobalStyleType;
 }
 
 const Lottery = (props: LType) => {
@@ -50,19 +52,19 @@ const Lottery = (props: LType) => {
   useSetStyle(
     lotteryRef,
     {
-      background: props.LotteryGlobalStyle?.background,
-      borderRadius: props.LotteryGlobalStyle?.radius,
+      background: props.lotteryGlobalStyle?.background,
+      borderRadius: props.lotteryGlobalStyle?.radius,
     },
-    [props.LotteryGlobalStyle],
+    [props.lotteryGlobalStyle],
   );
 
   useSetStyle(
     lotteryBtnRef,
     {
-      background: props.LotteryGlobalStyle?.btnBackground,
-      color: props.LotteryGlobalStyle?.btnColor,
+      background: props.lotteryGlobalStyle?.btnBackground,
+      color: props.lotteryGlobalStyle?.btnColor,
     },
-    [props.LotteryGlobalStyle],
+    [props.lotteryGlobalStyle],
   );
 
   const realViewData = useMemo(() => {
@@ -144,7 +146,7 @@ const Lottery = (props: LType) => {
       ref={lotteryRef}
       className="lottery"
       style={{
-        background: props.LotteryGlobalStyle?.background,
+        background: props.lotteryGlobalStyle?.background,
       }}
     >
       {realViewData.map((item) => {

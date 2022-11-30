@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-self: space-between;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
 
   .lottery-item {
@@ -70,12 +70,24 @@
 
 @media screen and (max-width: 768px) {
   .lottery {
-    @include lottery-base(300px)
+    @include lottery-base(300px);
+
+    .lottery-item {
+      .award-text {
+        font-size: 12px;
+      }
+    }
   }
 }
 
 @media screen and (max-width: 390px) {
   .lottery {
-    @include lottery-base(250px)
+    @include lottery-base(280px);
+
+    .lottery-item {
+      .award-text {
+        font-size: 9px;
+      }
+    }
   }
 }
