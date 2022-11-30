@@ -53,7 +53,7 @@ const NineSpaceFlip = (props: NSFType) => {
       props.times &&
       (props.times > 9 || props.times < 1)
     )
-      throw new Error('NineSpaceFlip times invalid');
+      throw new Error('nine-space-flip times invalid');
   }, [props.times]);
 
   useEffect(() => {
