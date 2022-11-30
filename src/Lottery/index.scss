@@ -46,7 +46,13 @@
 
 @media screen and (min-width: 1160px) {
   .lottery {
-    @include lottery-base(500px)
+    @include lottery-base(500px);
+
+    .lottery-item {
+      .award-text {
+        font-size: 0.8vw;
+      }
+    }
   }
 }
 
