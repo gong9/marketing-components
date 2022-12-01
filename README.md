@@ -1,7 +1,7 @@
 # marketing-components
 
-[![NPM version](https://img.shields.io/npm/v/marketing-components.svg?style=flat)](https://npmjs.org/package/marketing-components)
-[![NPM downloads](http://img.shields.io/npm/dm/marketing-components.svg?style=flat)](https://npmjs.org/package/marketing-components)
+[![NPM version](https://img.shields.io/npm/v/marketing-components-pro.svg?style=flat)](https://npmjs.org/package/marketing-components)
+[![NPM downloads](http://img.shields.io/npm/dm/marketing-components-pro.svg?style=flat)](https://npmjs.org/package/marketing-components)
 
 [docs](https://gong9.github.io/marketing-components/)
 
