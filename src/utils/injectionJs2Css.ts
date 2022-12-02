@@ -14,8 +14,6 @@ const injectionJs2Css = (
   }
 
   if (nodeRef.current) {
-    console.log(nodeRef.current);
-
     for (const key in newData) {
       if (Object.prototype.hasOwnProperty.call(newData, key))
         (nodeRef.current as HTMLElement).style.setProperty(

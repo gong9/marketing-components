@@ -46,7 +46,6 @@ const Lottery = (props: LType) => {
 
   const flag = useRef(true);
   const lotteryRef = useRef<HTMLDivElement>(null);
-  const lotteryBtnRef = useRef<HTMLDivElement | null>(null);
 
   // set style
   useEffect(() => {
@@ -58,9 +57,18 @@ const Lottery = (props: LType) => {
       btnColor: props.lotteryGlobalStyle?.btnColor || '#fff',
       activeBackground:
         props.lotteryGlobalStyle?.activeBackground || 'rgb(121, 221, 248)',
-      activeColor: props.lotteryGlobalStyle?.activeColor || '#fff',
+      activeColor: props.lotteryGlobalStyle?.activeColor || '#000',
     });
   }, []);
+
+  const generateItemStyle = (isBtn: boolean, item: LDataType) => {
+    if (isBtn) return {};
+
+    return {
+      background: item.background || 'rgb(133 132 137)',
+      color: item.textColor || '#fff',
+    };
+  };
 
   const realViewData = useMemo(() => {
     return [
@@ -147,12 +155,7 @@ const Lottery = (props: LType) => {
               active:
                 item.id !== '__btn__' && prizeActiveState[`active${item.id}`],
             })}
-            ref={(node) => {
-              if (item.id === '__btn__') {
-                lotteryBtnRef.current = node;
-              }
-            }}
-            style={{ background: item.background }}
+            style={{ ...generateItemStyle(item.id === '__btn__', item) }}
             onClick={() => start(item.id)}
             key={item.id}
           >
@@ -163,12 +166,7 @@ const Lottery = (props: LType) => {
                 alt="awardIcon"
               />
             )}
-            <span
-              className="award-text"
-              style={{ color: item.textColor || 'azure' }}
-            >
-              {item.name}
-            </span>
+            <span className="award-text">{item.name}</span>
           </div>
         );
       })}
