@@ -186,6 +186,10 @@ export default () => (
     LotteryGlobalStyle={LotteryGlobalStyle}
     data={data}
     callback={callback}
+    lotteryGlobalStyle={{
+      background: 'red',
+      btnBackground: 'rgb(33, 194, 140)',
+    }}
   />
 );
 ```

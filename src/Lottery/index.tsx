@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSetStyle } from '../hooks';
 import { calCustomProbabilityIndex } from '../utils';
+import injectionJs2Css from '../utils/injectionJs2Css';
 import './index.scss';
 
 type CallbackType = (arg: LDataType) => void;
@@ -49,23 +49,18 @@ const Lottery = (props: LType) => {
   const lotteryBtnRef = useRef<HTMLDivElement | null>(null);
 
   // set style
-  useSetStyle(
-    lotteryRef,
-    {
-      background: props.lotteryGlobalStyle?.background,
-      borderRadius: props.lotteryGlobalStyle?.radius,
-    },
-    [props.lotteryGlobalStyle],
-  );
-
-  useSetStyle(
-    lotteryBtnRef,
-    {
-      background: props.lotteryGlobalStyle?.btnBackground,
-      color: props.lotteryGlobalStyle?.btnColor,
-    },
-    [props.lotteryGlobalStyle],
-  );
+  useEffect(() => {
+    injectionJs2Css(lotteryRef, {
+      background: props.lotteryGlobalStyle?.background || '#fff',
+      radius: props.lotteryGlobalStyle?.radius || '5px',
+      btnBackground:
+        props.lotteryGlobalStyle?.btnBackground || 'rgb(226 142 11)',
+      btnColor: props.lotteryGlobalStyle?.btnColor || '#fff',
+      activeBackground:
+        props.lotteryGlobalStyle?.activeBackground || 'rgb(121, 221, 248)',
+      activeColor: props.lotteryGlobalStyle?.activeColor || '#fff',
+    });
+  }, []);
 
   const realViewData = useMemo(() => {
     return [
@@ -142,13 +137,7 @@ const Lottery = (props: LType) => {
   };
 
   return (
-    <div
-      ref={lotteryRef}
-      className="lottery"
-      style={{
-        background: props.lotteryGlobalStyle?.background,
-      }}
-    >
+    <div ref={lotteryRef} className="lottery">
       {realViewData.map((item) => {
         return (
           <div
