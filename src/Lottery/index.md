@@ -103,13 +103,6 @@ export default () => <Lottery time={10000} data={data} callback={callback} />;
 ```tsx
 import { Lottery } from 'marketing-components-pro';
 
-const LotteryGlobalStyle = {
-  background: '#e37815',
-  radius: '5px',
-  btnBackground: 'rgb(70 210 227)',
-  btnBackColor: 'azure',
-};
-
 const data = [
   {
     id: 1,
@@ -183,7 +176,6 @@ const callback = (luckyRewards) => {
 
 export default () => (
   <Lottery
-    LotteryGlobalStyle={LotteryGlobalStyle}
     data={data}
     callback={callback}
     lotteryGlobalStyle={{

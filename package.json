@@ -1,6 +1,6 @@
 {
   "name": "marketing-components-pro",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "marketing components",
   "license": "MIT",
   "module": "dist/index.js",
