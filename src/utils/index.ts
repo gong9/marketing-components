@@ -67,7 +67,6 @@ export const calCustomProbabilityIndex = <
   T extends { probability?: number; id: number | string },
 >(
   handleData: T[],
-  isGetId?: boolean,
 ) => {
   if (handleData.length <= 0) {
     throw new Error('计算概率值出错');
@@ -84,11 +83,11 @@ export const calCustomProbabilityIndex = <
       tempArr = [
         ...tempArr,
         ...Array(Math.floor((handleData[i].probability as number) * 100)).fill(
-          isGetId ? handleData[i].id : i,
+          i,
         ),
       ];
     } else {
-      notHandleItems.push(handleData[i]);
+      notHandleItems.push(i);
     }
   }
 
@@ -98,7 +97,7 @@ export const calCustomProbabilityIndex = <
         ...tempArr,
         ...Array(
           Math.floor(Math.floor((surplus / notHandleItems.length) * 100)),
-        ).fill(isGetId ? item.id : item),
+        ).fill(item),
       ];
     });
   }
