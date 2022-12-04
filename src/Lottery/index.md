@@ -100,6 +100,22 @@ export default () => <Lottery time={10000} data={data} callback={callback} />;
 
 ### 自定义样式
 
+样式配置主要划分为两大部门
+
+- 全局样式配置
+  - background 九宫格的背景
+  - radius 九宫格的 radius
+  - btnBackground 抽奖按钮的背景
+  - btnColor 抽奖按钮的字体颜色
+  - activeBackground 当前选中态奖项的背景
+  - activeColor 当前选中态的字体颜色
+- 单奖励项样式配置
+  - background 当前奖项的背景
+  - textColor 当前奖项的字体颜色
+  - awardIcon 设置当前奖项的小图片
+
+#### 例子 🌰：模拟掘金的抽奖样式
+
 ```tsx
 import { Lottery } from 'marketing-components-pro';
 
