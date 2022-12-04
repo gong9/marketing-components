@@ -59,7 +59,7 @@ const Lottery = (props: LType) => {
         props.lotteryGlobalStyle?.activeBackground || 'rgb(121, 221, 248)',
       activeColor: props.lotteryGlobalStyle?.activeColor || '#000',
     });
-  }, []);
+  }, [props.lotteryGlobalStyle]);
 
   const generateItemStyle = (isBtn: boolean, item: LDataType) => {
     if (isBtn) return {};
