@@ -306,11 +306,13 @@ const data = [
 export default () => <Lottery data={data} path={[2, 4, 7, 6, 5, 3, 0, 1]} />;
 ```
 
-### 指定命中
+### 指定当前命中
 
 大部分的抽奖类的逻辑因安全问题都会放在后端处理，这里我们只需要传一个`currentHit`即可
 
 `currentHit`的值为`奖项的id`
+
+#### 指定当前的命中项是代金券 2
 
 ```tsx
 import { Lottery } from 'marketing-components-pro';
