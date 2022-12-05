@@ -306,6 +306,57 @@ const data = [
 export default () => <Lottery data={data} path={[2, 4, 7, 6, 5, 3, 0, 1]} />;
 ```
 
+### 指定命中
+
+大部分的抽奖类的逻辑因安全问题都会放在后端处理，这里我们只需要传一个`currentHit`即可
+
+`currentHit`的值为`奖项的id`
+
+```tsx
+import { Lottery } from 'marketing-components-pro';
+
+const data = [
+  {
+    id: 1,
+    name: '代金券1',
+  },
+  {
+    id: 2,
+    name: '代金券2',
+  },
+  {
+    id: 3,
+    name: '代金券3',
+  },
+  {
+    id: 4,
+    name: '代金券4',
+  },
+  {
+    id: 5,
+    name: '代金券5',
+  },
+  {
+    id: 6,
+    name: '代金券6',
+  },
+  {
+    id: 7,
+    name: '代金券7',
+  },
+  {
+    id: 8,
+    name: '代金券8',
+  },
+];
+
+const callback = (luckyRewards) => {
+  console.log(luckyRewards.name);
+};
+
+export default () => <Lottery data={data} callback={callback} currentHit={2} />;
+```
+
 ### 自定义概率
 
 > 注意，如果各奖项均设置概率，请保证其概率之和为 1

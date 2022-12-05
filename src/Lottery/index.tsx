@@ -31,6 +31,7 @@ interface LType {
   callback?: CallbackType;
   path?: number[];
   lotteryGlobalStyle?: LotteryGlobalStyleType;
+  currentHit?: number;
 }
 
 const Lottery = (props: LType) => {
@@ -104,9 +105,18 @@ const Lottery = (props: LType) => {
       luckyRewardsValue = calCustomProbabilityIndex<LDataType>(props.data);
     }
 
-    const luckyRewardsIndex = props.useCustomProbability
+    let luckyRewardsIndex = props.useCustomProbability
       ? path.findIndex((item) => item === luckyRewardsValue)
       : Math.floor(Math.random() * path.length);
+
+    if (props.currentHit) {
+      const index = props.data.findIndex(
+        (item) => item.id === props.currentHit,
+      );
+      if (index !== -1) luckyRewardsIndex = index;
+      else
+        throw new Error('there is a problem with the current hit id specified');
+    }
 
     setTimeout(() => {
       stop = true;
