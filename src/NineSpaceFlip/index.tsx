@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { throttle } from 'poor-utils-pro';
 import React, { useEffect, useRef, useState } from 'react';
 import { calCustomProbabilityPro } from '../utils';
+import injectionJs2Css from '../utils/injectionJs2Css';
 import './index.scss';
 
 interface NSFItemType {
@@ -11,10 +12,21 @@ interface NSFItemType {
   [propName: string]: unknown;
 }
 
+interface NsfGlobalStyleType {
+  outsideBackground?: string;
+  outsideColor?: string;
+  insideBackground?: string;
+  insideColor?: string;
+  insideIcon?: string;
+  uncheckedBackground?: string;
+  uncheckedColor?: string;
+}
+
 interface NSFType {
   data: NSFItemType[];
   times?: number;
   useCustomProbability?: boolean;
+  nsfGlobalStyle?: NsfGlobalStyleType;
   currentHitAfter?: (hitAward: NSFItemType) => void;
   allHitAfter?: (hitAwardArr: NSFItemType[]) => void;
 }
@@ -46,6 +58,7 @@ const NineSpaceFlip = (props: NSFType) => {
   const locationRecordMap = useRef<LocationRecordMapType[]>([]);
   const curSurplusDataArr = useRef<NSFItemType[]>([]);
   const curHitDataArr = useRef<NSFItemType[]>([]);
+  const nsfRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (
@@ -66,6 +79,21 @@ const NineSpaceFlip = (props: NSFType) => {
     curAwards.current = [...props.data];
     curSurplusDataArr.current = [...props.data];
   }, [props.data]);
+
+  useEffect(() => {
+    injectionJs2Css(nsfRef, {
+      outsideBackground:
+        props.nsfGlobalStyle?.outsideBackground || 'rgb(222, 220, 220)',
+      outsideColor: props.nsfGlobalStyle?.outsideColor,
+      insideBackground:
+        props.nsfGlobalStyle?.insideBackground || 'rgb(233, 238, 188)',
+      insideColor: props.nsfGlobalStyle?.insideColor,
+      insideIcon: props.nsfGlobalStyle?.insideIcon,
+      uncheckedBackground:
+        props.nsfGlobalStyle?.uncheckedBackground || 'rgb(214, 214, 211)',
+      uncheckedColor: props.nsfGlobalStyle?.uncheckedColor,
+    });
+  }, [props.nsfGlobalStyle]);
 
   const reprocessDataOrder = (
     curHitAwardId: number | string,
@@ -165,7 +193,7 @@ const NineSpaceFlip = (props: NSFType) => {
   }, 10);
 
   return (
-    <div className="nine-space-filp">
+    <div className="nine-space-filp" ref={nsfRef}>
       {curAwards.current.map((item, index) => {
         return (
           <div

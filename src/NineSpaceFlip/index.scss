@@ -33,13 +33,15 @@
     }
 
     .nsf-item-outside {
-      background-color: rgb(222, 220, 220);
+      background-color: var(--outsideBackground);
+      color: var(--outsideColor);
       transform: rotateY(0);
       z-index: 2;
     }
 
     .nsf-item-inside {
-      background-color: rgb(233, 238, 188);
+      background-color: var(--insideBackground);
+      color: var(--insideColor);
       transform: rotateY(180deg);
       z-index: 1;
     }
@@ -62,7 +64,8 @@
 
   .not-seleted {
     .nsf-item-inside {
-      background-color: rgb(214, 214, 211);
+      background-color: var(--uncheckedBackground);
+      color: var(--uncheckedColor);
     }
   }
 }
