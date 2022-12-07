@@ -12,6 +12,10 @@ export default defineConfig({
         title: '组件',
         link: '/components/lottery',
       },
+      {
+        title: 'todo',
+        link: '/todo',
+      },
     ],
   },
   outputPath: 'docs-dist',
