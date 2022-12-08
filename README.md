@@ -1,4 +1,4 @@
-# marketing-components
+# marketing-components 「自带概率逻辑的营销组件库」
 
 [![NPM version](https://img.shields.io/npm/v/marketing-components-pro.svg?style=flat)](https://npmjs.org/package/marketing-components-pro)
 [![NPM downloads](http://img.shields.io/npm/dm/marketing-components-pro.svg?style=flat)](https://npmjs.org/package/marketing-components-pro)
